@@ -12,10 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.serializeJSON
 //= require underscore
 //= require backbone
 //= require sessions_template
-//= require_tree ./vendor
 //= require_tree ../templates
 //= require_tree ./models
 //= require_tree ./collections
