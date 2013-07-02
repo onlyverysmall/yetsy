@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>yetsy</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <header>
+    <div align="right">
+      <% if current_user %>
+        Welcome, <%= link_to current_user.username, user_url(current_user) %>
+        <%= button_to "Log out", session_path, :method => "delete" %>    
+      <% else %>
+        <%= link_to "Log in", new_session_url %> or 
+        <%= link_to "Sign up", new_user_url %>
+      <% end %>
+    </div>
+
+    <div class="index-logo">
+      <h1><%= link_to "yetsy", root_url %></h1>
+    </div>
+  </header>
+  <hr>
+
+  <div class="errors">
+    <% flash[:errors].try(:each) do |error| %>
+      <%= error %>
+    <% end %>
+  </div>
+
+  <%= yield %>
+
+</body>
+</html>

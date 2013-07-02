@@ -1,0 +1,9 @@
+<h1><%= @shop.name %></h1>
+
+<ul>
+  <% @shop.items.each do |item| %>
+    <li>
+      <%= link_to item.title, item_url(item) %>
+    </li>
+  <% end %>
+</ul>

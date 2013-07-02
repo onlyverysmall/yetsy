@@ -1,0 +1,17 @@
+<!-- look up filepicker! -->
+
+<div class="categories">
+  <ul>
+    <% @categories.each do |category| %>
+      <li><%= link_to category.name, "#" %></li>
+    <% end %>
+  </ul>
+</div>
+
+<div>
+  <ul>
+    <% @items.each do |item| %>
+      <li><%= link_to item.title, item_url(item) %></li>
+    <% end %>
+  </ul>
+</div>

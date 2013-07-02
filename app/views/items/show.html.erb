@@ -1,0 +1,15 @@
+<h1><%= @item.title %></h1>
+
+<button>buy item</button>
+<br>
+
+<%= @item.description %>
+<br>
+
+$<%= @item.price %>
+<br>
+
+This item brought to you by <%= @item.shop.name %>
+<hr>
+
+Category: <%= @item.category.name %>

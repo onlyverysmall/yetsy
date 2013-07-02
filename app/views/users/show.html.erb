@@ -1,0 +1,7 @@
+<h1><%= @user.username %> </h1>
+
+<% if @user.shop.nil? %>
+  <%= link_to "Open a shop", new_shop_url %>
+<% else %>
+  <%= link_to "View shop", shop_url(@user.shop) %>
+<% end %>
