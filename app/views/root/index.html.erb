@@ -1,4 +1,3 @@
-<!-- look up filepicker! -->
 <div class="categories">
   <ul>
     <% @categories.each do |category| %>
@@ -7,10 +6,10 @@
   </ul>
 </div>
 
-<div>
-  <ul>
-    <% @items.each do |item| %>
-      <li><%= link_to item.title, item_url(item) %></li>
-    <% end %>
-  </ul>
+<div class="items">
+  <% @items.each do |item| %>
+    <div class="item">
+      <%= link_to item.title, item_url(item) %>
+    </div>
+  <% end %>
 </div>

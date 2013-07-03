@@ -15,7 +15,7 @@
 //= require jquery.serializeJSON
 //= require underscore
 //= require backbone
-//= require sessions_template
+//= require yetsy
 //= require_tree ../templates
 //= require_tree ./models
 //= require_tree ./collections

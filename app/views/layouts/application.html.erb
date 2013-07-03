@@ -8,7 +8,7 @@
 </head>
 <body>
   <header>
-    <div align="right">
+    <div class="user_nav">
       <% if current_user %>
         Welcome, <%= link_to current_user.username, user_url(current_user) %>
         <%= button_to "Log out", session_path, :method => "delete" %>    

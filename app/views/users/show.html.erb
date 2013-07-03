@@ -1,9 +1,22 @@
 <h1><%= @user.username %> </h1>
 
-<% if @user.shop.nil? %>
-  <%= link_to "Open a shop", new_shop_url %>
-<% else %>
+<% if @user.shop %>
   <%= link_to "View shop: " + @user.shop.name, shop_url(@user.shop) %>
+<% else %>
+  <h4>Open a shop</h4>
+  <form action="<%= user_url(@user) %>" method="post">
+    <input type="hidden" name="_method" value="put">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+    <label for="user_shop_attributes_name">Shop name</label>
+    <input 
+      type="text" 
+      name="user[shop_attributes][name]" 
+      id="user_shop_attributes_name">
+    <br>
+
+    <input type="submit" value="Create shop" />
+  </form>
 <% end %>
 
 <%#= link_to "View your favorites", favorites_url(@user) %>
