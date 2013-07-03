@@ -12,6 +12,11 @@
  *= require_tree .
  */
 
+form {
+  max-width: 250px;
+  border: 1px solid #ccc;
+}
+
 .user_nav {
   float: right;
 }
@@ -33,7 +38,7 @@
 .item {
   margin: 5px;
   width: 180px;
-  height: 180px;
+  min-height: 180px;
   border: 1px solid #ccc;
   float: left;
 }
@@ -48,6 +53,10 @@
 
 .item_price {
   float: right;
+}
+
+.item_price {
+  
 }
 
 .fav_button {

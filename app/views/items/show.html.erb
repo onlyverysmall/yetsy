@@ -7,14 +7,20 @@
   <%= filepicker_image_tag @item.filepicker_url, w: 400, h: 400, fit: 'clip' %>
 </div>
 
-<%= @item.description %>
-<br>
+<div class="item_show_description">
+  <%= @item.description %>
+</div>
 
-$<%= @item.price %>
-<br>
+<div class="item_show_price">
+  $<%= @item.price %>
+</div>
 
-This item brought to you by 
-<%= link_to @item.shop.name, shop_url(@item.shop) %>
+<div class="item_show_shop">
+  This item brought to you by 
+  <%= link_to @item.shop.name, shop_url(@item.shop) %>
+</div>
 <hr>
 
-Category: <%= @item.category.name %>
+<div class="item_show_category">
+  Category: <%= @item.category.name %>
+</div>

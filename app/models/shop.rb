@@ -19,5 +19,5 @@ class Shop < ActiveRecord::Base
   belongs_to :owner, 
     class_name: "User",
     inverse_of: :shop
-  has_many :items
+  has_many :items, dependent: :destroy
 end

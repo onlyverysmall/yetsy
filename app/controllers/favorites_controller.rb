@@ -1,13 +1,18 @@
 class FavoritesController < ApplicationController
   def index
-    @favorites = current_user.favorites
+    @user = User.find(params[:user_id])
+    if user_authorized?(@user)
+      @favorited_items = current_user.favorited_items
+    else
+      redirect_to root_url
+    end
   end
 
   def create
     @favorite = current_user.favorites.build(params[:favorite])
 
     if @favorite.save
-      render json: @favorite
+      redirect_to :back
     else
       render json: { error: "unable to favorite item" }, status: 422
     end
@@ -17,6 +22,6 @@ class FavoritesController < ApplicationController
     @favorite = Favorite.find(params[:favorite])
     @favorite.destroy
 
-    render json: @favorite
+    redirect_to :back
   end
 end

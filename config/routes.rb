@@ -5,10 +5,11 @@ Yetsy::Application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
 
   resources :users, only: [:new, :create, :show, :update] do
-    resources :favorites, only: [:index, :create, :destroy]
+    resources :favorites, only: [:index]
     resources :purchases, only: [:index]    
   end
   
+  resources :favorites, only: [:create, :destroy]
   resources :items
   resources :shops, only: [:new, :create, :show, :edit, :update] do 
     resources :orders, only: [:index]

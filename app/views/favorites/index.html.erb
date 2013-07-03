@@ -1,0 +1,5 @@
+<h2><%= @user.username %>'s favorites</h2>
+
+<% @favorited_items.each do |item| %>
+  <%= render partial: "shared/item", locals: { item: item } %>
+<% end %>

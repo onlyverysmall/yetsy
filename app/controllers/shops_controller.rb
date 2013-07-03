@@ -39,9 +39,11 @@ class ShopsController < ApplicationController
     @shop.assign_attributes(params[:shop])
 
     if @shop.save
-      render json: @shop
+      render :show
     else
-      # error
+      flash.now[:errors] ||= []
+      flash.now[:errors] << @shop.errors.full_messages.to_sentence
+      render :edit
     end
   end
 end

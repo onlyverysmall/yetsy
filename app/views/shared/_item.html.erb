@@ -1,7 +1,6 @@
-<!-- this will be modified for images at some point -->
 <div class="item">
   <div class="item_photo">
-    <%= filepicker_image_tag item.filepicker_url, w: 160, h: 160, fit: 'clip' %>
+    <%= filepicker_image_tag item.filepicker_url, w: 160, h: 140, fit: 'crop' %>
   </div>
 
   <div class="item_title">
@@ -11,7 +10,15 @@
   <div class="item_price">
     $<%= item.price %>
   </div>
-<!--   <%# if current_user %>
+
+  <br>
+  <div class="item_shop">
+    <%= link_to item.shop.name, shop_url(item.shop) %>
+  </div>
+
+  <% if @favorited_items.include?(item) %>
+    <button data-id="<%= item.id %>" class="unfav_button">unfavorite</button> 
+  <% else %>
     <button data-id="<%= item.id %>" class="fav_button">favorite</button> 
-  <%# end %> -->
+  <% end %> 
 </div>

@@ -1,16 +1,15 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
-
 gem 'pg'
 
+
 group :development do 
+  gem 'annotate'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'annotate'
   gem 'pry-rails'
 end
-
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -18,7 +17,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
-gem 'filepicker-rails'
-gem 'paperclip'
 gem 'bcrypt-ruby', require: 'bcrypt'
+gem 'filepicker-rails'
+gem 'jquery-rails'
+gem 'paperclip'
