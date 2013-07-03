@@ -3,5 +3,23 @@
 <% if @user.shop.nil? %>
   <%= link_to "Open a shop", new_shop_url %>
 <% else %>
-  <%= link_to "View shop", shop_url(@user.shop) %>
+  <%= link_to "View shop: " + @user.shop.name, shop_url(@user.shop) %>
 <% end %>
+
+<%#= link_to "View your favorites", favorites_url(@user) %>
+<%#= link_to "View your purchases", orders_url(@user) %>
+
+<form action="<%= user_url(@user) %>" method="post">
+  <input type="hidden" name="_method" value="put">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <h4>Change password</h4>
+  <label for="user_password">Password</label>
+  <input 
+    type="password" 
+    id="user_password"
+    name="user[password]">
+  <br>
+
+  <input type="submit" value="Change password">
+</form>

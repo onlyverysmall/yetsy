@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
-
   before_filter :redirect_logged_in_user, only: [:new]
+
+  def new
+    @user = User.new
+  end
 
   def create
     @user = User.new(params[:user])
@@ -15,20 +18,10 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
-    @user = User.find(params[:id])
-
-    render json: @user
-  end
-
-  def new
-    @user = User.new
-  end
-
   def show
     @user = User.find(params[:id])
 
-    if @user == current_user
+    if user_authorized?(@user)
       render :show
     else
       redirect_to root_url
@@ -39,12 +32,13 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.assign_attributes(params[:user])
 
-    if @user.save
-      render json: @user
+    if user_authorized?(@user) && @user.save
+      # should render a success message also
+      render :show
     else
       flash.now[:errors] ||= []
       flash.now[:errors] << @user.errors.full_messages.to_sentence
-      render :edit
+      render :show
     end
   end
 end

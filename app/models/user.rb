@@ -11,8 +11,7 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :password, :username
-  attr_reader :password
+  attr_accessible :password, :username, :shop_attributes
 
   validates :username, :password_digest, presence: true
   validates :username, uniqueness: true
@@ -20,7 +19,15 @@ class User < ActiveRecord::Base
 
   has_one :shop, 
     foreign_key: :owner_id,
-    dependent: :destroy
+    dependent: :destroy,
+    inverse_of: :owner
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_items, 
+    through: :favorites,
+    source: :item
+
+  accepts_nested_attributes_for :shop, :reject_if => :all_blank
+  
 
   def password
     @password || self.password_digest

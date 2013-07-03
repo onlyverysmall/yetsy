@@ -1,0 +1,26 @@
+<h2>Modify shop</h2>
+<form action="<%= shop_url(@shop) %>" method="post">
+  <input type="hidden" name="_method" value="put">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <label for="shop_name">Shop name</label>
+  <input 
+    type="text" 
+    name="shop[name]" 
+    id="shop_name"
+    value="<%= @shop.name %>">
+  <br>
+
+  <input type="submit" value="Modify shop" />
+</form>
+
+<h3>Delete Listings</h3>
+
+<ul>
+  <% @items.each do |item| %>
+    <li>
+      <%= item.title %>
+      <%= button_to "Delete item", item_url(item), method: "delete" %>
+    </li>
+  <% end %>
+</ul>

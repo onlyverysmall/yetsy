@@ -1,4 +1,4 @@
-<h1>Sign up</h1>
+<h2>Sign up</h2>
 
 <form action="<%= users_url %>" method="post">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
@@ -18,7 +18,16 @@
     name="user[password]">
   <br>
 
-  <input type="submit" value="Sign Up" />
+  <h3>Optional: create a shop</h3>
+  <label for="user_shop_attributes_name">Shop name</label>
+  <input 
+    type="text" 
+    name="user[shop_attributes][name]" 
+    id="user_shop_attributes_name"
+    value="<%= @user.shop.name if @user.shop %>">
+  <br>
+
+  <input type="submit" value="Sign Up">
 </form>
 
 <hr>

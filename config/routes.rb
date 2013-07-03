@@ -5,7 +5,7 @@ SessionsTemplate::Application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
 
   resources :users, only: [:new, :create, :show, :update] do
-    resources :favorites, only: [:index]
+    resources :favorites, only: [:index, :create, :destroy]
     resources :purchases, only: [:index]    
   end
   

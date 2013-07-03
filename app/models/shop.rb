@@ -12,11 +12,12 @@
 class Shop < ActiveRecord::Base
   attr_accessible :name, :owner_id
 
-  validates :name, :owner_id, presence: true
+  validates :name, :owner, presence: true
   validates :name, uniqueness: true
   validates :name, length: { maximum: 16 }
 
   belongs_to :owner, 
-    class_name: "User"
+    class_name: "User",
+    inverse_of: :shop
   has_many :items
 end

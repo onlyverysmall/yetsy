@@ -1,15 +1,19 @@
 class ItemsController < ApplicationController
   def new
-    @item = current_user.items.build
+    @item = current_user.shop.items.build
+    @categories = Category.all
   end
 
   def create
-    @item = current_user.items.build(params[:item])
+    @item = current_user.shop.items.build(params[:item])
+    @categories = Category.all
     
     if @item.save
-
+      redirect_to shop_url(current_user.shop)
     else
-
+      flash.now[:errors] ||= []
+      flash.now[:errors] << @item.errors.full_messages.to_sentence
+      render :new
     end
   end
 
@@ -19,21 +23,33 @@ class ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
+    @categories = Category.all
   end
 
   def update
+    @categories = Category.all
     @item = Item.find(params[:id])
-    @item.assign_attributes
+    @item.assign_attributes(params[:item])
         
     if @item.save
-      
+      render :show
     else
-      
+      flash.now[:errors] ||= []
+      flash.now[:errors] << @item.errors.full_messages.to_sentence
+      render :edit
     end
   end
 
   def destroy
     @item = Item.find(params[:id])
+
+    if @item.destroy
+      redirect_to shop_url(current_user.shop)
+    else
+      flash.now[:errors] ||= []
+      flash.now[:errors] << @item.errors.full_messages.to_sentence
+      redirect_to shop_url(current_user.shop)
+    end
   end
 
 end

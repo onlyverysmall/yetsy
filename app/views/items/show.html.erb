@@ -9,7 +9,7 @@
 $<%= @item.price %>
 <br>
 
-This item brought to you by <%= @item.shop.name %>
+This item brought to you by <%= link_to @item.shop.name, shop_url(@item.shop) %>
 <hr>
 
 Category: <%= @item.category.name %>

@@ -21,10 +21,21 @@ class ShopsController < ApplicationController
 
   def edit
     @shop = Shop.find(params[:id])
+    @items = @shop.items
+    @categories = Category.all
+
+    if user_authorized?(current_user)
+      render :edit
+    else
+      redirect_to root_url
+    end
   end
 
   def update
     @shop = Shop.find(params[:id])
+    @items = @shop.items
+    @categories = Category.all
+
     @shop.assign_attributes(params[:shop])
 
     if @shop.save
