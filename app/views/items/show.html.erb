@@ -3,13 +3,18 @@
 <button>buy item</button>
 <br>
 
+<div class="item_photo_large">
+  <%= filepicker_image_tag @item.filepicker_url, w: 400, h: 400, fit: 'clip' %>
+</div>
+
 <%= @item.description %>
 <br>
 
 $<%= @item.price %>
 <br>
 
-This item brought to you by <%= link_to @item.shop.name, shop_url(@item.shop) %>
+This item brought to you by 
+<%= link_to @item.shop.name, shop_url(@item.shop) %>
 <hr>
 
 Category: <%= @item.category.name %>

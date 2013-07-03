@@ -1,0 +1,17 @@
+<!-- this will be modified for images at some point -->
+<div class="item">
+  <div class="item_photo">
+    <%= filepicker_image_tag item.filepicker_url, w: 160, h: 160, fit: 'clip' %>
+  </div>
+
+  <div class="item_title">
+    <%= link_to item.title, item_url(item) %>
+  </div>
+
+  <div class="item_price">
+    $<%= item.price %>
+  </div>
+<!--   <%# if current_user %>
+    <button data-id="<%= item.id %>" class="fav_button">favorite</button> 
+  <%# end %> -->
+</div>

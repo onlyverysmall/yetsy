@@ -8,6 +8,7 @@
 
 <ul>
   <% @shop.items.each do |item| %>
+  <%#= render partial: "shared/item", locals: { item: item } %>
     <li>
       <%= link_to item.title, item_url(item) %> 
       <% if user_authorized?(@shop.owner) %>  

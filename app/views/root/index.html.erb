@@ -1,3 +1,5 @@
+<!-- this needs to have a partial for the sidebar, and for each item -->
+
 <div class="categories">
   <ul>
     <% @categories.each do |category| %>
@@ -8,8 +10,6 @@
 
 <div class="items">
   <% @items.each do |item| %>
-    <div class="item">
-      <%= link_to item.title, item_url(item) %>
-    </div>
+    <%= render partial: "shared/item", locals: { item: item } %>
   <% end %>
 </div>

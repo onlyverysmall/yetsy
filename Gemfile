@@ -19,5 +19,6 @@ group :assets do
 end
 
 gem 'jquery-rails'
-
+gem 'filepicker-rails'
+gem 'paperclip'
 gem 'bcrypt-ruby', require: 'bcrypt'

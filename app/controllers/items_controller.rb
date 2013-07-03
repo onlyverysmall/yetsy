@@ -24,6 +24,13 @@ class ItemsController < ApplicationController
   def edit
     @item = Item.find(params[:id])
     @categories = Category.all
+
+    if user_authorized?(@item.owner)
+      render :edit
+    else
+      redirect_to root_url
+    end
+
   end
 
   def update

@@ -1,4 +1,4 @@
-SessionsTemplate::Application.routes.draw do
+Yetsy::Application.routes.draw do
   root to: "root#index"
   # figure out what to do with search
 

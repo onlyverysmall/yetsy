@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130702231738) do
+ActiveRecord::Schema.define(:version => 20130703210842) do
 
   create_table "categories", :force => true do |t|
     t.string   "name",       :null => false
@@ -30,14 +30,15 @@ ActiveRecord::Schema.define(:version => 20130702231738) do
   add_index "favorites", ["user_id"], :name => "index_favorites_on_user_id"
 
   create_table "items", :force => true do |t|
-    t.string   "title",                          :null => false
-    t.text     "description",                    :null => false
-    t.decimal  "price",                          :null => false
-    t.integer  "category_id",                    :null => false
-    t.integer  "shop_id",                        :null => false
-    t.boolean  "purchased",   :default => false, :null => false
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.string   "title",                             :null => false
+    t.text     "description",                       :null => false
+    t.decimal  "price",                             :null => false
+    t.integer  "category_id",                       :null => false
+    t.integer  "shop_id",                           :null => false
+    t.boolean  "purchased",      :default => false, :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.string   "filepicker_url"
   end
 
   add_index "items", ["category_id"], :name => "index_items_on_category_id"
@@ -56,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20130702231738) do
     t.string   "session_token"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "filepicker_url"
   end
 
 end

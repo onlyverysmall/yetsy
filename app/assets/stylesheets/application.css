@@ -13,7 +13,7 @@
  */
 
 .user_nav {
-  align: right;
+  float: right;
 }
 
 .categories {
@@ -24,7 +24,7 @@
 }
 
 .items {
-  width: 600px;
+  max-width: 600px;
   margin-left: 10px;
   border: 1px solid #ccc;
   float: left;
@@ -36,4 +36,19 @@
   height: 180px;
   border: 1px solid #ccc;
   float: left;
+}
+
+.item_photo {
+
+}
+
+.item_title {
+  float: left;
+}
+
+.item_price {
+  float: right;
+}
+
+.fav_button {
 }

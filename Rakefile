@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-SessionsTemplate::Application.load_tasks
+Yetsy::Application.load_tasks

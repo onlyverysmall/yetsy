@@ -8,10 +8,11 @@
 #  session_token   :string(255)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  filepicker_url  :string(255)
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :password, :username, :shop_attributes
+  attr_accessible :password, :username, :shop_attributes, :filepicker_url
 
   validates :username, :password_digest, presence: true
   validates :username, uniqueness: true
@@ -21,6 +22,7 @@ class User < ActiveRecord::Base
     foreign_key: :owner_id,
     dependent: :destroy,
     inverse_of: :owner
+  has_many :items, through: :shop
   has_many :favorites, dependent: :destroy
   has_many :favorited_items, 
     through: :favorites,
