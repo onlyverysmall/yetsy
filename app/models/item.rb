@@ -26,4 +26,8 @@ class Item < ActiveRecord::Base
   has_many :favoriting_users, 
     through: :favorites, 
     source: :user
+
+  searchable do
+    text :title, :description
+  end
 end
