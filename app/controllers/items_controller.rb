@@ -3,7 +3,9 @@ class ItemsController < ApplicationController
     @search = Item.search do
       fulltext params[:search]
     end
-    @favorited_items = current_user.favorited_items
+    if current_user
+      @favorited_items = current_user.favorited_items
+    end
     @items = @search.results
   end
 

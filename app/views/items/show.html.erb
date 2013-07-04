@@ -22,5 +22,6 @@
 <hr>
 
 <div class="item_show_category">
-  Category: <%= @item.category.name %>
+  <% cat = @item.category.name %>
+  Category: <%= link_to cat, items_url + "/?utf8=✓&search=" + cat, :'data-id' => @item.category.id %>
 </div>
