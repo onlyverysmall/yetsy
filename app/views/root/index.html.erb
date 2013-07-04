@@ -3,7 +3,8 @@
 <div class="categories">
   <ul>
     <% @categories.each do |category| %>
-      <li><%= link_to category.name, "items?utf8=✓&search=" + category.name, :'data-id' => category.id %></li>
+      <li><%= link_to category.name, "#", :'data-id' => category.id %>
+        <%#= link_to category.name, "items?utf8=✓&search=" + category.name, :'data-id' => category.id %></li>
     <% end %>
   </ul>
 </div>

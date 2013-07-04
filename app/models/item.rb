@@ -27,9 +27,10 @@ class Item < ActiveRecord::Base
     through: :favorites, 
     source: :user
 
-  searchable do
-    text :title, :description, :category_name
-  end
+    # removing sunspot/solr to see if this will actually work on heroku
+  # searchable do
+  #   text :title, :description, :category_name
+  # end
 
   def category_name
     self.category.name

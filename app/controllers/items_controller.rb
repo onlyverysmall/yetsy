@@ -1,12 +1,13 @@
 class ItemsController < ApplicationController
   def index
-    @search = Item.search do
-      fulltext params[:search]
-    end
-    if current_user
-      @favorited_items = current_user.favorited_items
-    end
-    @items = @search.results
+    # removing search until better solution
+    # @search = Item.search do
+    #   fulltext params[:search]
+    # end
+    # if current_user
+    #   @favorited_items = current_user.favorited_items
+    # end
+    # @items = @search.results
   end
 
   def new

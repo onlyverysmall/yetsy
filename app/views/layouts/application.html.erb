@@ -24,15 +24,16 @@
     </div>
   </header>
 
-  <div id="search">
-    <%= form_tag items_url, :method => :get do %>
+<!-- removing search until I have a better solution for heroku being a jerk -->
+<!--   <div id="search">
+    <%#= form_tag items_url, :method => :get do %>
       <p>
-        <%= text_field_tag :search, params[:search] %>
-        <%= submit_tag "Search", :name => nil %>
+        <%#= text_field_tag :search, params[:search] %>
+        <%#= submit_tag "Search", :name => nil %>
       </p>
-    <% end %>
+    <%# end %>
   </div>
-  <hr>
+ -->  <hr>
 
   <div class="errors">
     <% flash[:errors].try(:each) do |error| %>
