@@ -12,16 +12,19 @@ class FavoritesController < ApplicationController
     @favorite = current_user.favorites.build(params[:favorite])
 
     if @favorite.save
-      redirect_to :back
+      redirect_to root_url
     else
       render json: { error: "unable to favorite item" }, status: 422
     end
   end
 
   def destroy
-    @favorite = Favorite.find(params[:favorite])
-    @favorite.destroy
-
-    redirect_to :back
+    @favorite = Favorite.find(params[:id])
+    
+    if @favorite.destroy
+      redirect_to root_url
+    else
+      render json: { error: "unable to unfavorite item" }, status: 422
+    end
   end
 end

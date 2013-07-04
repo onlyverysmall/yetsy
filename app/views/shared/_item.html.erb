@@ -18,9 +18,23 @@
 
   <% if @favorited_items %>
     <% if @favorited_items.include?(item) %>
-      <button data-id="<%= item.id %>" class="unfav_button">unfavorite</button> 
+      <!-- unfavorite form -->
+      <% fave = Favorite.where(user_id: current_user.id, item_id: item.id).first %>
+      <form action="<%= favorite_url(fave) %>" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="hidden" name="favorite[id]" value="<%= fave.id %>">
+
+        <input type="submit" value="Unfavorite">
+      </form>
     <% else %>
-      <button data-id="<%= item.id %>" class="fav_button">favorite</button> 
-    <% end %>
+      <!-- favorite form -->
+      <form action="<%= favorites_url %>" method="post">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="hidden" name="favorite[item_id]" value="<%= item.id %>">
+
+        <input type="submit" value="Favorite">
+      </form>
+     <% end %>
   <% end %> 
 </div>
