@@ -12,9 +12,13 @@
  *= require_tree .
  */
 
-form {
+/*form {
   max-width: 250px;
   border: 1px solid #ccc;
+}*/
+
+#search {
+  float: right;
 }
 
 .user_nav {

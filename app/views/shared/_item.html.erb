@@ -16,9 +16,11 @@
     <%= link_to item.shop.name, shop_url(item.shop) %>
   </div>
 
-  <% if @favorited_items.include?(item) %>
-    <button data-id="<%= item.id %>" class="unfav_button">unfavorite</button> 
-  <% else %>
-    <button data-id="<%= item.id %>" class="fav_button">favorite</button> 
+  <% if @favorited_items %>
+    <% if @favorited_items.include?(item) %>
+      <button data-id="<%= item.id %>" class="unfav_button">unfavorite</button> 
+    <% else %>
+      <button data-id="<%= item.id %>" class="fav_button">favorite</button> 
+    <% end %>
   <% end %> 
 </div>

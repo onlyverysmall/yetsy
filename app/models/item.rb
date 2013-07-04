@@ -28,6 +28,10 @@ class Item < ActiveRecord::Base
     source: :user
 
   searchable do
-    text :title, :description
+    text :title, :description, :category_name
+  end
+
+  def category_name
+    self.category.name
   end
 end

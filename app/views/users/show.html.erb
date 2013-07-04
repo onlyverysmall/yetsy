@@ -7,7 +7,9 @@
 </div>
 
 <% if @user.shop %>
-  <%= link_to "View shop: " + @user.shop.name, shop_url(@user.shop) %>
+  <div>
+    <%= link_to "View shop: " + @user.shop.name, shop_url(@user.shop) %>
+  </div>
 <% else %>
   <h4>Open a shop</h4>
   <form action="<%= user_url(@user) %>" method="post">
@@ -26,8 +28,10 @@
   </form>
 <% end %>
 
-<%#= link_to "View your favorites", favorites_url(@user) %>
+<div>
+  <%= link_to "View your favorites", user_favorites_url(@user) %>
 <%#= link_to "View your purchases", orders_url(@user) %>
+</div>
 
 <br>
 

@@ -1,4 +1,12 @@
 class ItemsController < ApplicationController
+  def index
+    @search = Item.search do
+      fulltext params[:search]
+    end
+    @favorited_items = current_user.favorited_items
+    @items = @search.results
+  end
+
   def new
     @item = current_user.shop.items.build
     @categories = Category.all
