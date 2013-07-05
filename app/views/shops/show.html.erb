@@ -8,7 +8,7 @@
 </div>
 
 <div class="items">
-  <% @shop.items.each do |item| %>
+  <% @items.each do |item| %>
     <%= render partial: "shared/item", locals: { item: item } %>
     <% if user_authorized?(@shop.owner) %>  
       <div class="modify_item">

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130703210842) do
+ActiveRecord::Schema.define(:version => 20130704204903) do
 
   create_table "categories", :force => true do |t|
     t.string   "name",       :null => false
@@ -39,10 +39,18 @@ ActiveRecord::Schema.define(:version => 20130703210842) do
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
     t.string   "filepicker_url"
+    t.integer  "order_id"
   end
 
   add_index "items", ["category_id"], :name => "index_items_on_category_id"
   add_index "items", ["shop_id"], :name => "index_items_on_shop_id"
+
+  create_table "orders", :force => true do |t|
+    t.integer  "buyer_id",   :null => false
+    t.integer  "shop_id",    :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "shops", :force => true do |t|
     t.integer  "owner_id",   :null => false

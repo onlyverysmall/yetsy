@@ -37,10 +37,14 @@
 
 <%= form_for @user do |f| %>
   <div>
-    <h4>Add avatar</h4>
+    <h4>Avatar</h4>
     <%= f.filepicker_field :filepicker_url %> 
   </div>
 
+  <%= f.submit "Upload avatar" %>
+<% end %>
+
+<%= form_for @user do |f| %>
   <div>
     <h4>Change password</h4>
     <%= f.label :password, "New password" %>
@@ -48,5 +52,5 @@
     <%= f.password_field :password %>
   </div>
   <br>
-  <%= f.submit %>
+  <%= f.submit "Set password" %>
 <% end %>

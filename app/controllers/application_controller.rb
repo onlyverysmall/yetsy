@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
 
   include SessionsHelper
   include UsersHelper
+  include CartsHelper
+  include OrdersHelper
 
   def redirect_logged_in_user
     if logged_in? 

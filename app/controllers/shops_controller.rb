@@ -17,11 +17,12 @@ class ShopsController < ApplicationController
 
   def show
     @shop = Shop.find(params[:id])
+    @items = @shop.items.available
   end
 
   def edit
     @shop = Shop.find(params[:id])
-    @items = @shop.items
+    @items = @shop.items.available
     @categories = Category.all
 
     if user_authorized?(current_user)

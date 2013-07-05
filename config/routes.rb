@@ -1,8 +1,8 @@
 Yetsy::Application.routes.draw do
   root to: "root#index"
-  # figure out what to do with search
 
   resource :session, only: [:new, :create, :destroy]
+  resource :cart, only: [:show, :create, :destroy]
 
   resources :users, only: [:new, :create, :show, :update] do
     resources :favorites, only: [:index]
@@ -10,6 +10,7 @@ Yetsy::Application.routes.draw do
   end
   
   resources :favorites, only: [:create, :destroy]
+  resources :orders, only: :create
   resources :items
   resources :shops, only: [:new, :create, :show, :edit, :update] do 
     resources :orders, only: [:index]

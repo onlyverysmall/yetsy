@@ -1,6 +1,6 @@
 <div class="item">
   <div class="item_photo">
-    <%= filepicker_image_tag item.filepicker_url, w: 160, h: 140, fit: 'crop' %>
+    <%= filepicker_image_tag item.filepicker_url, w: 160, h: 140, fit: 'crop'%>
   </div>
 
   <div class="item_title">
@@ -8,7 +8,11 @@
   </div>
 
   <div class="item_price">
-    $<%= item.price %>
+    <% if item.purchased %>
+      SOLD
+    <% else %>
+      $<%= item.price %>
+    <% end %>
   </div>
 
   <br>
@@ -16,7 +20,7 @@
     <%= link_to item.shop.name, shop_url(item.shop) %>
   </div>
 
-  <% if @favorited_items %>
+  <% if @favorited_items && !(current_user.items.include?(item)) %>
     <% if @favorited_items.include?(item) %>
       <!-- unfavorite form -->
       <% fave = Favorite.where(user_id: current_user.id, item_id: item.id).first %>

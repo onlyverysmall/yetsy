@@ -1,0 +1,35 @@
+<div>
+  <% if !@cart_items.empty? %>
+
+    <form action="<%= orders_url %>" method="post">
+      <input type="hidden" name="authenticity_token" value="<%= 
+        form_authenticity_token %>">
+      <input type="submit" value="Submit order">
+    </form>
+
+    <ul>
+      <% @cart_items.each do |item| %>
+        <li>
+          <%= link_to item.title, item_url(item) %>
+          <form action="<%= cart_url %>" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <input type="hidden" name="cart[item_id]" value="<%= item.id %>">
+
+            <input type="submit" value="Remove">
+          </form>
+        </li>
+      <% end%>
+    </ul>
+
+    <div>
+      <p>Total: $<%= @price %></p>
+    </div>
+
+  <% else %>
+    
+    <p>You have no items in your cart</p>
+  
+  <% end %>
+</div>
+

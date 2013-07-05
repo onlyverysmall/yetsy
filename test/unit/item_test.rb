@@ -12,6 +12,7 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  filepicker_url :string(255)
+#  order_id       :integer
 #
 
 require 'test_helper'

@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
   has_many :favorited_items, 
     through: :favorites,
     source: :item
+  has_many :orders, foreign_key: :buyer_id
 
   accepts_nested_attributes_for :shop, :reject_if => :all_blank
   

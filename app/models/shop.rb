@@ -20,4 +20,5 @@ class Shop < ActiveRecord::Base
     class_name: "User",
     inverse_of: :shop
   has_many :items, dependent: :destroy
+  has_many :orders, through: :items, inverse_of: :shop
 end

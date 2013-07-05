@@ -1,6 +1,15 @@
 <h1><%= @item.title %></h1>
+  
+  <% if @item.purchased %>
+    <p>SOLD</p>
+  <% elsif current_user && !(current_user.items.include?(@item)) %>
+    <form action="<%= cart_url %>" method="post">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input type="hidden" name="cart[item_id]" value="<%= @item.id %>">
 
-<button>buy item</button>
+      <input type="submit" value="Add to cart">
+    </form>
+  <% end %>
 <br>
 
 <div class="item_photo_large">
@@ -23,5 +32,5 @@
 
 <div class="item_show_category">
   <% cat = @item.category.name %>
-  Category: <%= link_to cat, items_url + "/?utf8=✓&search=" + cat, :'data-id' => @item.category.id %>
+  Category: <%#= link_to cat, items_url + "/?utf8=✓&search=" + cat, :'data-id' => @item.category.id %>
 </div>

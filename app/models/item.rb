@@ -12,10 +12,11 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  filepicker_url :string(255)
+#  order_id       :integer
 #
 
 class Item < ActiveRecord::Base
-  attr_accessible :title, :description, :price, :category_id, :shop_id, :filepicker_url
+  attr_accessible :title, :description, :price, :category_id, :shop_id, :filepicker_url, :order_id
 
   validates :title, :description, :price, :category_id, :shop_id, :filepicker_url, presence: true
 
@@ -26,11 +27,10 @@ class Item < ActiveRecord::Base
   has_many :favoriting_users, 
     through: :favorites, 
     source: :user
+  belongs_to :order
 
-    # removing sunspot/solr to see if this will actually work on heroku
-  # searchable do
-  #   text :title, :description, :category_name
-  # end
+  scope :available, conditions: { order_id: nil }
+  scope :sold, where("order_id IS NOT NULL ")
 
   def category_name
     self.category.name
