@@ -1,5 +1,8 @@
-<h1><%= @item.title %></h1>
-  
+<%= render partial: "shared/page_header", locals: { header: @item.title } %>
+<!-- until you have somewhere to put this -->
+<%#= render partial: "shared/avatar", locals: { user: @item.owner } %>
+
+<div class="span8 offset2">
   <% if @item.purchased %>
     <p>SOLD</p>
   <% elsif current_user && !(current_user.items.include?(@item)) %>
@@ -10,27 +13,29 @@
       <input type="submit" value="Add to cart">
     </form>
   <% end %>
-<br>
+  <br>
 
-<div class="item_photo_large">
-  <%= filepicker_image_tag @item.filepicker_url, w: 400, h: 400, fit: 'clip' %>
-</div>
+  <div class="item_photo_large">
+    <%= filepicker_image_tag @item.filepicker_url, w: 400, h: 400, fit: 'clip' %>
+  </div>
 
-<div class="item_show_description">
-  <%= @item.description %>
-</div>
+  <div class="item_show_description">
+    <%= @item.description %>
+  </div>
 
-<div class="item_show_price">
-  $<%= @item.price %>
-</div>
+  <div class="item_show_price">
+    <%= number_to_currency(@item.price) %>
+  </div>
 
-<div class="item_show_shop">
-  This item brought to you by 
-  <%= link_to @item.shop.name, shop_url(@item.shop) %>
-</div>
-<hr>
+  <div class="item_show_shop">
+    This item brought to you by 
+    <%= link_to @item.shop.name, shop_url(@item.shop) %>
+  </div>
+  <hr>
 
-<div class="item_show_category">
-  <% cat = @item.category.name %>
-  Category: <%#= link_to cat, items_url + "/?utf8=✓&search=" + cat, :'data-id' => @item.category.id %>
+  <div class="item_show_category">
+    <% cat = @item.category.name %>
+    Category: <%#= link_to cat, items_url + "/?utf8=✓&search=" + cat, :'data-id' => @item.category.id %>
+  </div>
+
 </div>

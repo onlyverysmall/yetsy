@@ -1,26 +1,52 @@
-<h2>Modify shop</h2>
-<form action="<%= shop_url(@shop) %>" method="post">
-  <input type="hidden" name="_method" value="put">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+<%= render partial: "shared/page_header", locals: { header: "modify shop" } %>
 
-  <label for="shop_name">Shop name</label>
-  <input 
-    type="text" 
-    name="shop[name]" 
-    id="shop_name"
-    value="<%= @shop.name %>">
-  <br>
+<%= render partial: "shared/shop_sidebar", locals: { shop: @shop } %>
 
-  <input type="submit" value="Modify shop" />
-</form>
+<div class="span8">
+  <form action="<%= shop_url(@shop) %>" method="post">
+    <input type="hidden" name="_method" value="put">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
-<h3>Delete Active Listings</h3>
+    <label for="shop_name">shop name</label>
+    <input 
+      type="text" 
+      name="shop[name]" 
+      id="shop_name"
+      value="<%= @shop.name %>">
+    <br>
 
-<ul>
-  <% @items.each do |item| %>
-    <li>
-      <%= item.title %>
-      <%= button_to "Delete item", item_url(item), method: "delete" %>
-    </li>
-  <% end %>
-</ul>
+    <input type="submit" value="modify shop name" />
+  </form>
+  <hr>
+
+  <h4>delete active items</h4>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>title</th>
+        <th>price</th>
+        <th>date created</th>
+        <th>delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @items.each do |item| %>
+        <tr>
+          <td>
+            <%= link_to item.title, item_url(item) %>
+          </td>
+          <td>
+            <%= number_to_currency(item.price) %>
+          </td>
+          <td>
+            <%= item.created_at.strftime('%A, %B %-d, %Y') %>
+          </td>
+          <td>
+            <%= link_to "delete", item_url(item), method: "delete" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -36,6 +36,13 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     @categories = Category.all
 
+    if @item.purchased
+      flash[:errors] ||= []
+      flash[:errors] << "You cannot edit purchased items"
+      redirect_to item_url(@item)
+      return
+    end
+
     if user_authorized?(@item.owner)
       render :edit
     else

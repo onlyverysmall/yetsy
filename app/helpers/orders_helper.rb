@@ -13,4 +13,8 @@ module OrdersHelper
       end
     end
   end
+
+  def order_total(order)
+    order.items.map { |item| item.price }.inject(:+)
+  end
 end

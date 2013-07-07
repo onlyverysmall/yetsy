@@ -1,3 +1,5 @@
-<h2>Edit item</h2>
+<%= render partial: "shared/page_header", locals: { header: "edit item" } %>
+
+<%= render partial: "shared/shop_sidebar", locals: { shop: @item.shop } %>
 
 <%= render "form" %>

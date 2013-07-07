@@ -1,56 +1,40 @@
-<h1><%= @user.username %> </h1>
+<%= render partial: "shared/page_header", locals: { header: @user.username } %>
 
-<div>
-  <% if @user.filepicker_url %>
-    <%= filepicker_image_tag @user.filepicker_url, w: 120, h: 120, fit: 'clip' %>
+<%= render partial: "shared/user_sidebar", locals: { user: @user } %>
+
+<div class="span3">
+  <%= form_for @user do |f| %>
+      <h4>avatar</h4>
+      <%= f.filepicker_field :filepicker_url %> 
+
+    <%= f.submit "upload avatar" %>
+  <% end %>
+  <hr>
+
+  <%= form_for @user do |f| %>
+      <h4>change password</h4>
+      <%= f.label :password, "new password" %>
+      <%= f.password_field :password %>
+    <br>
+    <%= f.submit "set password" %>
+  <% end %>
+  <hr>
+
+  <% if @user.shop.nil? %>
+    <h4>open a shop</h4>
+    <form action="<%= user_url(@user) %>" method="post">
+      <input type="hidden" name="_method" value="put">
+      <input type="hidden" name="authenticity_token" 
+        value="<%= form_authenticity_token %>">
+
+      <label for="user_shop_attributes_name">shop name</label>
+      <input 
+        type="text" 
+        name="user[shop_attributes][name]" 
+        id="user_shop_attributes_name">
+      <br>
+
+      <input type="submit" value="create shop" />
+    </form>
   <% end %>
 </div>
-
-<% if @user.shop %>
-  <div>
-    <%= link_to "View shop: " + @user.shop.name, shop_url(@user.shop) %>
-  </div>
-<% else %>
-  <h4>Open a shop</h4>
-  <form action="<%= user_url(@user) %>" method="post">
-    <input type="hidden" name="_method" value="put">
-    <input type="hidden" name="authenticity_token" 
-      value="<%= form_authenticity_token %>">
-
-    <label for="user_shop_attributes_name">Shop name</label>
-    <input 
-      type="text" 
-      name="user[shop_attributes][name]" 
-      id="user_shop_attributes_name">
-    <br>
-
-    <input type="submit" value="Create shop" />
-  </form>
-<% end %>
-
-<div>
-  <%= link_to "View your favorites", user_favorites_url(@user) %>
-<%#= link_to "View your purchases", orders_url(@user) %>
-</div>
-
-<br>
-
-<%= form_for @user do |f| %>
-  <div>
-    <h4>Avatar</h4>
-    <%= f.filepicker_field :filepicker_url %> 
-  </div>
-
-  <%= f.submit "Upload avatar" %>
-<% end %>
-
-<%= form_for @user do |f| %>
-  <div>
-    <h4>Change password</h4>
-    <%= f.label :password, "New password" %>
-    <br>
-    <%= f.password_field :password %>
-  </div>
-  <br>
-  <%= f.submit "Set password" %>
-<% end %>

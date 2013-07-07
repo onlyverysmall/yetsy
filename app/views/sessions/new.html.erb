@@ -1,14 +1,16 @@
-<h1>Log in</h1>
+<div class="span6 offset3">
+  <h2>log in</h2>
 
-<form action="/session" method="post">
+  <form action="/session" method="post">
 
-  <label>Username: <input type="text" name="user[username]" /></label>
-  <br>
-  <label>Password: <input type="password" name="user[password]" /></label>
-  <input type="submit" value="Login" />
+    <label>username: <input type="text" name="user[username]"></label>
+    <br>
+    <label>password: <input type="password" name="user[password]"></label>
+    <input type="submit" value="log in">
 
-</form>
+  </form>
 
-<p>
-  Don't have an account? <%= link_to "Sign up", new_user_path %>
-</p>
+  <p>
+    Don't have an account? <%= link_to "Sign up", new_user_path %>
+  </p>
+</div>

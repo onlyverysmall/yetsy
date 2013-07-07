@@ -25,7 +25,7 @@ class ShopsController < ApplicationController
     @items = @shop.items.available
     @categories = Category.all
 
-    if user_authorized?(current_user)
+    if user_authorized?(@shop.owner)
       render :edit
     else
       redirect_to root_url

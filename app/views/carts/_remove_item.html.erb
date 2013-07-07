@@ -1,0 +1,7 @@
+<form action="<%= cart_url %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="cart[item_id]" value="<%= item.id %>">
+
+  <input type="submit" value="remove">
+</form>

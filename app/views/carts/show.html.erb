@@ -1,35 +1,49 @@
-<div>
-  <% if !@cart_items.empty? %>
+<%= render partial: "shared/page_header", locals: { header: "your cart" } %>
+
+<%= render partial: "shared/user_sidebar", locals: { user: current_user } %>
+
+<div class="span8">
+  <% if @cart_items.empty? %>
+    <h4>You have no items in your cart</h4>
+  <% else %>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>title</th>
+          <th>price</th>
+          <th>shop</th>
+          <th>remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @cart_items.each do |item| %>
+          <tr>
+            <td>
+              <%= link_to item.title, item_url(item) %>
+            </td>
+            <td>
+              <%= link_to item.shop.name, shop_url(item.shop) %>
+            </td>
+            <td>
+              <%= number_to_currency(item.price) %>
+            </td>
+            <td>
+              <%= render partial: "remove_item", locals: { item: item } %>
+            </td>
+          </tr>
+        <% end %>
+        <tr>
+          <td colspan="2">total:</td>
+          <td colspan="2"><%= number_to_currency(@price) %></td>
+        </tr>
+      </tbody>
+    </table>
 
     <form action="<%= orders_url %>" method="post">
       <input type="hidden" name="authenticity_token" value="<%= 
         form_authenticity_token %>">
-      <input type="submit" value="Submit order">
+      <input type="submit" value="submit order">
     </form>
-
-    <ul>
-      <% @cart_items.each do |item| %>
-        <li>
-          <%= link_to item.title, item_url(item) %>
-          <form action="<%= cart_url %>" method="post">
-            <input type="hidden" name="_method" value="delete">
-            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-            <input type="hidden" name="cart[item_id]" value="<%= item.id %>">
-
-            <input type="submit" value="Remove">
-          </form>
-        </li>
-      <% end%>
-    </ul>
-
-    <div>
-      <p>Total: $<%= @price %></p>
-    </div>
-
-  <% else %>
-    
-    <p>You have no items in your cart</p>
-  
   <% end %>
 </div>
 

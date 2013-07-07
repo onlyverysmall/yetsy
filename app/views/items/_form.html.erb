@@ -1,34 +1,31 @@
-<%= form_for @item do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %> 
-  <br>
+<div class="span5">
+  <%= form_for @item do |f| %>
+    <%= f.label :title, "title" %>
+    <%= f.text_field :title %> 
 
-  <%= f.label :description %> 
-  <br>
-  <%= f.text_area :description, cols: 30, rows: 10 %>
-  <br>
+    <%= f.label :description, "description" %> 
+    <%= f.text_area :description, cols: 100, rows: 10 %>
 
-  <%= f.label :price %>
-  $<%= f.text_field :price %>
-  <br>
+    <%= f.label :price, "price" %>
+    $<%= f.text_field :price %>
 
-  <label for="item_category_id">Category</label>
-  <select 
-    type="text" 
-    name="item[category_id]" 
-    id="item_category_id">
-    
-    <% @categories.each do |cat| %>
-      <option value="<%= cat.id %>"><%= cat.name %></option>
-    <% end %>
+    <label for="item_category_id">category</label>
+    <select 
+      type="text" 
+      name="item[category_id]" 
+      id="item_category_id">
+      
+      <% @categories.each do |cat| %>
+        <option value="<%= cat.id %>"><%= cat.name.downcase %></option>
+      <% end %>
+    </select>
 
-  </select>
-  <br>
+    <div>
+      <%= f.label :filepicker_url, "upload photo" %>
+      <%= f.filepicker_field :filepicker_url %>
+    </div>
 
-  <div>
-    <%= f.label :filepicker_url, "Upload photo:" %>
-    <%= f.filepicker_field :filepicker_url %>
-  </div>
-
-  <%= f.submit %>
-<% end %>
+    <br>
+    <%= f.submit "submit" %>
+  <% end %>
+</div>

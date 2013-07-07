@@ -1,15 +1,45 @@
-<% if @orders %>
-  <ul>
-    <% @orders.each do |order| %>
-      <li>
-        <%= order.created_at.strftime('%A, %B %-d, %Y') %>
-        <br>
-        <% order.items.each do |item| %>
-          <%= render partial: "shared/item", locals: { item: item } %>
+<%= render partial: "shared/page_header", locals: { header: @shop.name + " orders" } %>
+
+<%= render partial: "shared/shop_sidebar", locals: { shop: @shop } %>
+
+<div class="span8">
+  <% if @orders.empty? %>
+    <h4>You have no orders</h4>
+  <% else %>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>buyer</th>
+          <th>order date</th>
+          <th>order total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @orders.each do |order| %>
+          <tr>
+            <td>
+              <%= order.buyer.username %>
+            </td>
+            <td>
+              <%= order.created_at.strftime('%A, %B %-d, %Y') %>
+            </td>
+            <td>
+              <strong><%= number_to_currency(order_total(order)) %></strong>
+            </td>
+          </tr>
+          <% order.items.each do |item| %>
+            <tr>
+              <td></td>
+              <td>
+                <%= link_to item.title, item_url(item) %>
+              </td>
+              <td>
+                <%= number_to_currency(item.price) %>
+              </td>
+            </tr>
+          <% end %>
         <% end %>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>You have no orders</p>
-<% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>

@@ -1,13 +1,8 @@
-<h1><%= @shop.name %></h1>
+<%= render partial: "shared/page_header", locals: { header: @shop.name } %>
 
-<div class="edit_shop_links">
-  <% if user_authorized?(@shop.owner) %>
-    <%= link_to "Edit shop", edit_shop_url(@shop) %> |
-    <%= link_to "Create new item", new_item_url %>
-  <% end %>
-</div>
-
-<div class="items">
+<%= render partial: "shared/shop_sidebar", locals: { shop: @shop } %>  
+  
+<div class="span8">
   <% @items.each do |item| %>
     <%= render partial: "shared/item", locals: { item: item } %>
     <% if user_authorized?(@shop.owner) %>  

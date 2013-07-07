@@ -12,31 +12,14 @@
  *= require_tree .
  */
 
-/*form {
-  max-width: 250px;
-  border: 1px solid #ccc;
-}*/
-
-#search {
-  float: right;
+body {
+  padding-top: 60px;
+  background: url(handmadepaper.png);
 }
-
-.user_nav {
-  float: right;
-}
-
-.categories {
-  width: 150px;
-  border: 1px solid #ccc;
-  float: left;
-  clear: both;
-}
-
-.items {
-  max-width: 600px;
-  margin-left: 10px;
-  border: 1px solid #ccc;
-  float: left;
+@media (max-width: 979px) {
+  body {
+    padding-top: 0px;
+  }
 }
 
 .item {
@@ -45,23 +28,4 @@
   min-height: 180px;
   border: 1px solid #ccc;
   float: left;
-}
-
-.item_photo {
-
-}
-
-.item_title {
-  float: left;
-}
-
-.item_price {
-  float: right;
-}
-
-.item_price {
-  
-}
-
-.fav_button {
 }

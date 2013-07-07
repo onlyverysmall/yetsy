@@ -1,0 +1,17 @@
+<div class="span2">
+  <%= render partial: "shared/avatar", locals: { user: user } %>
+
+  <div class="well sidebar-nav">
+    <ul class="nav nav-list">
+      <li>
+        <%= link_to "my favorites", user_favorites_url(user) %>
+      </li>
+      <li>
+        <%= (link_to "my shop", shop_url(user.shop)) if user.shop %>
+      </li>
+      <li>
+        <%= (link_to "my purchases", user_purchases_url(user)) if @purchases %>
+      </li>
+    </ul>
+  </div>
+</div>

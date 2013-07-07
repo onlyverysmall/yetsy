@@ -11,7 +11,7 @@
     <% if item.purchased %>
       SOLD
     <% else %>
-      $<%= item.price %>
+      <%= number_to_currency(item.price) %>
     <% end %>
   </div>
 

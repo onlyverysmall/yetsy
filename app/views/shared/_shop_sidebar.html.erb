@@ -1,0 +1,25 @@
+<div class="span2">
+  <%= render partial: "shared/avatar", locals: { user: shop.owner } %>
+
+  <% if user_authorized?(shop.owner) %>
+    <div class="well sidebar-nav">    
+      <ul class="nav nav-list">
+        <li>
+          <%= link_to "view shop", shop_url(shop) %>
+        </li>
+        <li>
+          <%= link_to "edit shop", edit_shop_url(shop) %>
+        </li>
+        <li>
+          <%= link_to "add item", new_item_url %>
+        </li>
+        <li>
+          <%= (link_to "your orders", shop_orders_url(shop)) if shop.orders %>
+        </li>
+        <li>
+          <%= link_to "view profile", user_url(shop.owner) %>
+        </li>
+      </ul>
+    </div>
+  <% end %>
+</div>
