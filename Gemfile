@@ -24,4 +24,5 @@ end
 gem 'bcrypt-ruby', require: 'bcrypt'
 gem 'filepicker-rails'
 gem 'jquery-rails'
-gem 'paperclip'
+gem 'sunspot_rails'
+gem 'sunspot_solr'

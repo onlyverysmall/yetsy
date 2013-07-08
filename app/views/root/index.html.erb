@@ -1,15 +1,4 @@
-<div class="span2">
-  <div class="well sidebar-nav">
-    <ul class="nav nav-list">
-      <li class="nav-header">categories</li>
-      <% @categories.each do |category| %>
-        <li>
-          <%= link_to category.name, "#", :'data-id' => category.id %>
-        </li>
-      <% end %>
-    </ul>
-  </div><!--/.well -->
-</div><!--/span-->
+<%= render partial: "shared/category_sidebar" %>
 
 <div class="span8">
   <% @items.each do |item| %>

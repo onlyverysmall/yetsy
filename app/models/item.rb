@@ -37,6 +37,10 @@ class Item < ActiveRecord::Base
   scope :available, conditions: { order_id: nil }
   scope :sold, where("order_id IS NOT NULL")
 
+  searchable do
+    text :title, :description, :category_name
+  end
+
   def category_name
     self.category.name
   end
