@@ -7,10 +7,11 @@
 #  shop_id    :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  status     :boolean          default(FALSE), not null
 #
 
 class Order < ActiveRecord::Base
-  attr_accessible :buyer_id, :shop_id
+  attr_accessible :buyer_id, :shop_id, :status
 
   belongs_to :buyer, class_name: "User"
   belongs_to :shop 

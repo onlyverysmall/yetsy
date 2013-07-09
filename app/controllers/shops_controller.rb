@@ -18,6 +18,7 @@ class ShopsController < ApplicationController
   def show
     @shop = Shop.find(params[:id])
     @items = @shop.items.available
+    @favorited_items = current_user.favorited_items
   end
 
   def edit

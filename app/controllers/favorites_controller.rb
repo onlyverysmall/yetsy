@@ -4,6 +4,8 @@ class FavoritesController < ApplicationController
     if user_authorized?(@user)
       @favorited_items = current_user.favorited_items
     else
+      flash[:errors] ||= []
+      flash[:errors] << "You aren't authorized to see that page."
       redirect_to root_url
     end
   end
@@ -12,7 +14,7 @@ class FavoritesController < ApplicationController
     @favorite = current_user.favorites.build(params[:favorite])
 
     if @favorite.save
-      redirect_to root_url
+      redirect_to :back
     else
       render json: { error: "unable to favorite item" }, status: 422
     end
@@ -22,7 +24,7 @@ class FavoritesController < ApplicationController
     @favorite = Favorite.find(params[:id])
     
     if @favorite.destroy
-      redirect_to root_url
+      redirect_to :back
     else
       render json: { error: "unable to unfavorite item" }, status: 422
     end

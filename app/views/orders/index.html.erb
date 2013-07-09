@@ -2,7 +2,7 @@
 
 <%= render partial: "shared/shop_sidebar", locals: { shop: @shop } %>
 
-<div class="span8">
+<div class="span9">
   <% if @orders.empty? %>
     <h4>You have no orders</h4>
   <% else %>
@@ -12,6 +12,7 @@
           <th>buyer</th>
           <th>order date</th>
           <th>order total</th>
+          <th>order status</th>
         </tr>
       </thead>
       <tbody>
@@ -25,6 +26,18 @@
             </td>
             <td>
               <strong><%= number_to_currency(order_total(order)) %></strong>
+            </td>
+            <td>
+              <%= order.status ? "shipped" : "not shipped" %>
+              <% if !order.status %>
+                <form action="<%= order_url(order) %>" method="post">
+                  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                  <input type="hidden" name="_method" value="put">
+
+                  <input type="hidden" name="order[status]" id="order_status"value="true">
+                  <input type="submit" value="mark as shipped">
+                </form>
+              <% end %>
             </td>
           </tr>
           <% order.items.each do |item| %>

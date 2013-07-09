@@ -2,14 +2,8 @@
 
 <%= render partial: "shared/shop_sidebar", locals: { shop: @shop } %>  
   
-<div class="span8">
+<div class="span9">
   <% @items.each do |item| %>
     <%= render partial: "shared/item", locals: { item: item } %>
-    <% if user_authorized?(@shop.owner) %>  
-      <div class="modify_item">
-        <%= button_to "Edit", edit_item_url(item), method: "get" %>
-        <%= button_to "Delete item", item_url(item), method: "delete" %>
-      </div>
-      <% end %> 
   <% end %>
 </div>

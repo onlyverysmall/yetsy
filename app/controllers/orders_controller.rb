@@ -11,24 +11,28 @@ class OrdersController < ApplicationController
   end
 
   def create
-    # this is crazy wonkiness and needs refactoring
     @cart_item_ids = session[:cart]
-    @shop_ids = @cart_item_ids.map { |id| Item.find(id).shop_id }.uniq
+    @shop_ids = get_shop_ids(@cart_item_ids)
 
-    @shop_ids.each do |shop_id|
-      order = Order.new(buyer_id: current_user.id, shop_id: shop_id)
+    if create_orders_for_shops(@shop_ids, @cart_item_ids)
+      redirect_to user_purchases_url(current_user)
+    else
+      flash.now[:errors] ||= []
+      flash.now[:errors] << "Something went horribly wrong. I don't know what. It could be anything, really. Do you know where your towel is?"
+      redirect_to cart_url
+    end  
+  end
 
-      if order.save!
-        set_item_order_ids!(order.id, shop_id, @cart_item_ids)
-        session[:cart] = nil
-      else
-        flash.now[:errors] ||= []
-        flash.now[:errors] << shop.errors.full_messages
-        redirect_to cart_url
-        return
-      end
+  def update
+    @order = Order.find(params[:id])
+    @order.assign_attributes(params[:order])
+
+    if @order.save
+      redirect_to shop_orders_url(@order.shop)
+    else
+      flash.now[:errors] ||= []
+      flash.now[:errors] << @order.errors.full_messages
+      redirect_to shop_orders_url(@order.shop)
     end
-    
-    redirect_to user_url(current_user)
   end
 end

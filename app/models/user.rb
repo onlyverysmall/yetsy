@@ -22,12 +22,21 @@ class User < ActiveRecord::Base
     foreign_key: :owner_id,
     dependent: :destroy,
     inverse_of: :owner
-  has_many :items, through: :shop
-  has_many :favorites, dependent: :destroy
+  has_many :items, 
+    through: :shop
+  has_many :favorites, 
+    dependent: :destroy
   has_many :favorited_items, 
     through: :favorites,
     source: :item
-  has_many :orders, foreign_key: :buyer_id
+  has_many :orders, 
+    foreign_key: :buyer_id
+  has_many :purchased_items, 
+    through: :orders, 
+    source: :item
+  has_many :shops_purchased_from, 
+    through: :orders,
+    source: :shop
 
   accepts_nested_attributes_for :shop, :reject_if => :all_blank
   

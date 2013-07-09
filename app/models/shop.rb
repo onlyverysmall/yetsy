@@ -24,4 +24,9 @@ class Shop < ActiveRecord::Base
   has_many :orders, 
     through: :items, 
     inverse_of: :shop
+  has_many :sold_items, 
+    through: :orders,
+    source: :items
+  has_many :buyers, 
+    through: :orders
 end

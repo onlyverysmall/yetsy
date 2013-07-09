@@ -2,7 +2,7 @@
 
 <%= render partial: "shared/shop_sidebar", locals: { shop: @shop } %>
 
-<div class="span8">
+<div class="span9">
   <form action="<%= shop_url(@shop) %>" method="post">
     <input type="hidden" name="_method" value="put">
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">

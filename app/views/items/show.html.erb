@@ -2,40 +2,41 @@
 <!-- until you have somewhere to put this -->
 <%#= render partial: "shared/avatar", locals: { user: @item.owner } %>
 
-<div class="span8 offset2">
-  <% if @item.purchased %>
-    <p>SOLD</p>
-  <% elsif current_user && !(current_user.items.include?(@item)) %>
-    <form action="<%= cart_url %>" method="post">
-      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-      <input type="hidden" name="cart[item_id]" value="<%= @item.id %>">
+<div class="span9 offset2">
+  <div class="row">
+    <div class="span5 item-photo-large">
+      <%= filepicker_image_tag @item.filepicker_url, w: 400, h: 400, fit: 'clip' %>
+    </div>
 
-      <input type="submit" value="Add to cart">
-    </form>
-  <% end %>
-  <br>
+    <div class="span3">
+      <div class="item-show-price">
+        <strong><%= number_to_currency(@item.price) %></strong>
+      </div>
 
-  <div class="item_photo_large">
-    <%= filepicker_image_tag @item.filepicker_url, w: 400, h: 400, fit: 'clip' %>
+      <div class="sold-or-cart-btn"> 
+        <% if @item.purchased %>
+          <p>SOLD</p>
+        <% elsif current_user && !(current_user.items.include?(@item)) %>
+          <%= link_to "add to cart", cart_url(cart: { item_id: @item.id }), method: "post", class: "btn" %>
+        <% end %>
+      </div>
+
+      <div class="item-show-shop">
+        View other items by  
+        <%= link_to @item.shop.name, shop_url(@item.shop) %>
+      </div>
+      <hr>
+
+      <div class="item-show-category">
+        <% cat = @item.category.name %>
+        Category: <%= link_to cat, items_url + "/?utf8=✓&search=" + cat, :'data-id' => @item.category.id %>
+      </div>
+    </div>  
   </div>
 
-  <div class="item_show_description">
-    <%= @item.description %>
+  <div>
+    <div class="span5 item-show-description">
+      <%= @item.description %>
+    </div>
   </div>
-
-  <div class="item_show_price">
-    <%= number_to_currency(@item.price) %>
-  </div>
-
-  <div class="item_show_shop">
-    This item brought to you by 
-    <%= link_to @item.shop.name, shop_url(@item.shop) %>
-  </div>
-  <hr>
-
-  <div class="item_show_category">
-    <% cat = @item.category.name %>
-    Category: <%#= link_to cat, items_url + "/?utf8=✓&search=" + cat, :'data-id' => @item.category.id %>
-  </div>
-
 </div>

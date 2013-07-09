@@ -1,0 +1,49 @@
+<%= render partial: "shared/page_header", locals: { header: @user.username + "'s purchases" } %>
+
+<%= render partial: "shared/user_sidebar", locals: { user: @user } %>
+
+<div class="span9">
+  <% if @purchases.empty? %>
+    <h4>You haven't purchased anything yet.</h4>
+  <% else %>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>seller</th>
+          <th>purchase date</th>
+          <th>purchase total</th>
+          <th>purchase status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @purchases.each do |purchase| %>
+          <tr>
+            <td>
+              <%= purchase.shop.name %>
+            </td>
+            <td>
+              <%= purchase.created_at.strftime('%A, %B %-d, %Y') %>
+            </td>
+            <td>
+              <strong><%= number_to_currency(order_total(purchase)) %></strong>
+            </td>
+            <td>
+              <%= purchase.status ? "shipped" : "not shipped" %>
+            </td>
+          </tr>
+          <% purchase.items.each do |item| %>
+            <tr>
+              <td></td>
+              <td>
+                <%= link_to item.title, item_url(item) %>
+              </td>
+              <td>
+                <%= number_to_currency(item.price) %>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>

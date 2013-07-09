@@ -1,9 +1,11 @@
 class ItemsController < ApplicationController
   def index
     @categories = Category.all
+    
     @search = Item.search do
       fulltext params[:search]
     end
+    
     if current_user
       @favorited_items = current_user.favorited_items
     end
@@ -46,9 +48,10 @@ class ItemsController < ApplicationController
     if user_authorized?(@item.owner)
       render :edit
     else
-      redirect_to root_url
+      flash[:errors] ||= []
+      flash[:errors] << "You aren't authorized to edit this item"
+      redirect_to :back
     end
-
   end
 
   def update
@@ -69,11 +72,11 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
 
     if @item.destroy
-      redirect_to shop_url(current_user.shop)
+      redirect_to :back
     else
       flash.now[:errors] ||= []
       flash.now[:errors] << @item.errors.full_messages.to_sentence
-      redirect_to shop_url(current_user.shop)
+      redirect_to :back
     end
   end
 

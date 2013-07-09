@@ -2,7 +2,7 @@
 
 <%= render partial: "shared/user_sidebar", locals: { user: current_user } %>
 
-<div class="span8">
+<div class="span9">
   <% if @cart_items.empty? %>
     <h4>You have no items in your cart</h4>
   <% else %>
@@ -42,7 +42,7 @@
     <form action="<%= orders_url %>" method="post">
       <input type="hidden" name="authenticity_token" value="<%= 
         form_authenticity_token %>">
-      <input type="submit" value="submit order">
+      <input type="submit" value="submit order" class="btn">
     </form>
   <% end %>
 </div>

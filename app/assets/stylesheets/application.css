@@ -27,10 +27,31 @@ body {
 }
 
 .item {
-  margin: 5px;
-  width: 180px;
-  min-height: 180px;
+  padding: 5px;
+  margin-bottom: 15px;
   border: 1px solid #ccc;
+}
+
+.item-photo-large {
+  border-radius: 5px;
+  padding: 15px;
+  border: 1px solid #ccc;
+}
+
+.item-show-price {
+  margin: 10px;
   float: left;
 }
 
+.item-show-shop {
+  float: left;
+}
+
+.item-show-description {
+  margin-top: 10px;
+  margin-left: -20px;
+  border-radius: 5px;
+  padding: 15px;
+  border: 1px solid #ccc;
+
+}

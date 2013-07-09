@@ -10,7 +10,7 @@ Yetsy::Application.routes.draw do
   end
   
   resources :favorites, only: [:create, :destroy]
-  resources :orders, only: :create
+  resources :orders, only: [:create, :update]
   resources :items
   resources :shops, only: [:new, :create, :show, :edit, :update] do 
     resources :orders, only: [:index]
