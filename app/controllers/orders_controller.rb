@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   def index
-    @shop = Shop.find(params[:shop_id])
+    @shop = Shop.find_by_name(params[:shop_id])
 
     if user_authorized?(@shop.owner)
       @orders = @shop.orders.uniq

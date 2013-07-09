@@ -29,4 +29,8 @@ class Shop < ActiveRecord::Base
     source: :items
   has_many :buyers, 
     through: :orders
+
+  def to_param
+    self.name
+  end
 end

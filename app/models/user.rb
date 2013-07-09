@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
     foreign_key: :buyer_id
   has_many :purchased_items, 
     through: :orders, 
-    source: :item
+    source: :items
   has_many :shops_purchased_from, 
     through: :orders,
     source: :shop
@@ -52,5 +52,9 @@ class User < ActiveRecord::Base
 
   def verify_password(password)
     BCrypt::Password.new(self.password_digest) == password
+  end
+
+  def to_param
+    self.username
   end
 end

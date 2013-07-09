@@ -16,13 +16,13 @@ class ShopsController < ApplicationController
   end
 
   def show
-    @shop = Shop.find(params[:id])
+    @shop = Shop.find_by_name(params[:id])
     @items = @shop.items.available
-    @favorited_items = current_user.favorited_items
+    @favorited_items = current_user.favorited_items if current_user
   end
 
   def edit
-    @shop = Shop.find(params[:id])
+    @shop = Shop.find_by_name(params[:id])
     @items = @shop.items.available
     @categories = Category.all
 
@@ -34,7 +34,7 @@ class ShopsController < ApplicationController
   end
 
   def update
-    @shop = Shop.find(params[:id])
+    @shop = Shop.find_by_name(params[:id])
     @items = @shop.items
     @categories = Category.all
 

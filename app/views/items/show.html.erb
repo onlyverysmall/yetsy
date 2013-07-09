@@ -16,6 +16,9 @@
       <div class="sold-or-cart-btn"> 
         <% if @item.purchased %>
           <p>SOLD</p>
+        <% elsif !current_user %>
+          <%= link_to "log in", new_session_url, class: "btn" %> or 
+          <%= link_to "sign up", new_user_url, class: "btn" %> to buy this item!
         <% elsif current_user && !(current_user.items.include?(@item)) %>
           <%= link_to "add to cart", cart_url(cart: { item_id: @item.id }), method: "post", class: "btn" %>
         <% end %>

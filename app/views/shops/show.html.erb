@@ -3,7 +3,9 @@
 <%= render partial: "shared/shop_sidebar", locals: { shop: @shop } %>  
   
 <div class="span9">
-  <% @items.each do |item| %>
-    <%= render partial: "shared/item", locals: { item: item } %>
-  <% end %>
+  <ul class="thumbnails">
+    <% @items.each do |item| %>
+      <%= render partial: "shared/item", locals: { item: item } %>
+    <% end %>
+  </ul>
 </div>

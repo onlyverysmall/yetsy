@@ -1,35 +1,29 @@
-<div class="span2 item">
-  <div class="item_photo">
-    <%= filepicker_image_tag item.filepicker_url, w: 160, h: 140, fit: 'crop'%>
+<li class="span3 item-list">
+  <div class="thumbnail">
+    <%= filepicker_image_tag item.filepicker_url, w: 260, h: 120, fit: 'crop' %>
+    <h3><%= link_to item.title, item_url(item) %></h3>
+    <p>
+      <% if item.purchased %>
+        SOLD
+      <% else %>
+        <%= number_to_currency(item.price) %>
+      <% end %>
+    </p>
+    <p>
+      <% if user_authorized?(item.owner) %>  
+        <div class="btn-group edit-delete-group">
+          <%= link_to "edit", edit_item_url(item), method: "get", class: "btn" %> 
+          <%= link_to "delete", item_url(item), method: "delete", class: "btn" %>
+        </div>
+      <% end %>
+
+      <% if @favorited_items && !(current_user.items.include?(item)) %>
+        <!-- unfavorite form -->
+        <% fave = Favorite.where(user_id: current_user.id, item_id: item.id).first %>
+        <button class="btn unfavorite <%= "hidden" unless @favorited_items.include?(item) %>" data-id="<%= fave.id if fave %>">unfavorite</button>
+        <!-- favorite form -->
+        <button class="btn favorite <%= "hidden" if @favorited_items.include?(item) %>" data-id="<%= item.id %>">favorite</button>
+      <% end %> 
+    </p>
   </div>
-
-  <div class="item-title">
-    <%= link_to item.title, item_url(item) %>
-  </div>
-
-  <div class="item-price">
-    <% if item.purchased %>
-      SOLD
-    <% else %>
-      <%= number_to_currency(item.price) %>
-    <% end %>
-  </div>
-
-  <% if user_authorized?(item.owner) %>  
-    <div class="btn-group edit-delete-group">
-      <%= link_to "edit", edit_item_url(item), method: "get", class: "btn" %> 
-      <%= link_to "delete", item_url(item), method: "delete", class: "btn" %>
-    </div>
-  <% end %>
-
-  <% if @favorited_items && !(current_user.items.include?(item)) %>
-    <% if @favorited_items.include?(item) %>
-      <!-- unfavorite form -->
-      <% fave = Favorite.where(user_id: current_user.id, item_id: item.id).first %>
-      <%= link_to "unfavorite", favorite_url(fave), method: "delete", class: "btn" %> 
-    <% else %>
-      <!-- favorite form -->
-      <%= link_to "favorite", favorites_url(favorite: { item_id: item.id }), method: "post", class: "btn" %>
-    <% end %>
-  <% end %> 
-</div>
+</li>

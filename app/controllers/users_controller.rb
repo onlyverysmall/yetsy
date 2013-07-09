@@ -19,8 +19,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-
+    @user = User.find_by_username(params[:id])
+    @purchases = Order.where(buyer_id: current_user.id)
+    
     if user_authorized?(@user)
       render :show
     else
@@ -29,7 +30,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = User.find_by_username(params[:id])
     @user.assign_attributes(params[:user])
 
     if user_authorized?(@user) && @user.save

@@ -20,6 +20,7 @@ module SessionsHelper
     token = SecureRandom.base64(12)
     current_user.session_token = token
     session[:session_token] = nil
+    session[:cart] = nil
     current_user.save
   end
 end

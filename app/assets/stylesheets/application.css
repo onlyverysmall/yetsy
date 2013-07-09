@@ -26,10 +26,9 @@ body {
   float: right;
 }
 
-.item {
-  padding: 5px;
+.item-list {
+  list-style-type: none;
   margin-bottom: 15px;
-  border: 1px solid #ccc;
 }
 
 .item-photo-large {
@@ -44,6 +43,7 @@ body {
 }
 
 .item-show-shop {
+  padding-top: 10px;
   float: left;
 }
 
@@ -53,5 +53,4 @@ body {
   border-radius: 5px;
   padding: 15px;
   border: 1px solid #ccc;
-
 }

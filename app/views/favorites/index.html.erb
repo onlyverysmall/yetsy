@@ -6,8 +6,10 @@
   <% if @favorited_items.empty? %>
     <h4>You have no favorites</h4>
   <% else %>
-    <% @favorited_items.each do |item| %>
-      <%= render partial: "shared/item", locals: { item: item } %>
-    <% end %>
+    <ul class="thumbnails">
+      <% @favorited_items.each do |item| %>
+        <%= render partial: "shared/item", locals: { item: item } %>
+      <% end %>
+    </ul>
   <% end %>
 </div>

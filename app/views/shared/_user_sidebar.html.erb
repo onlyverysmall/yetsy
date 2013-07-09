@@ -10,7 +10,7 @@
         <%= (link_to "my shop", shop_url(user.shop)) if user.shop %>
       </li>
       <li>
-        <%= (link_to "my purchases", user_purchases_url(user)) if @purchases %>
+        <%= (link_to "my purchases", user_purchases_url(user)) if user.purchased_items %>
       </li>
     </ul>
   </div>
