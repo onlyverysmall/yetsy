@@ -2,6 +2,7 @@ class CartsController < ApplicationController
 
   def show
     @cart_item_ids = session[:cart] || []
+    
     if @cart_item_ids
       @cart_items = @cart_item_ids.map { |id| Item.find(id) }.sort
       @price = calculate_price(@cart_item_ids)

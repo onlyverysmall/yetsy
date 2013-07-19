@@ -34,8 +34,10 @@ class Item < ActiveRecord::Base
     through: :favorites, 
     source: :user
 
-  scope :available, conditions: { order_id: nil }
-  scope :sold, where("order_id IS NOT NULL")
+  default_scope includes(:shop)
+
+  scope :available, conditions: { order_id: nil, purchased: false }
+  scope :sold, where("order_id IS NOT NULL AND purchased IS TRUE")
 
   searchable do
     text :title, :description, :category_name

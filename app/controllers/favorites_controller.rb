@@ -5,7 +5,7 @@ class FavoritesController < ApplicationController
     @user = User.find_by_username(params[:user_id])
     
     if user_authorized?(@user)
-      @favorited_items = current_user.favorited_items
+      @favorited_items = @user.favorited_items
     else
       flash[:errors] ||= []
       flash[:errors] << "You aren't authorized to see that page."
@@ -24,7 +24,7 @@ class FavoritesController < ApplicationController
   end
 
   def destroy
-    @favorite = Favorite.find(params[:id])
+    @favorite = current_user.favorites.find_by_item_id(params[:id])
     
     if @favorite.destroy
       redirect_to :back

@@ -3,50 +3,54 @@
 <%= render partial: "shared/shop_sidebar", locals: { shop: @shop } %>
 
 <div class="span9">
-  <form action="<%= shop_url(@shop) %>" method="post">
+  <form action="<%= shop_url(@shop) %>" method="post" class="form-inline">
     <input type="hidden" name="_method" value="put">
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
-    <label for="shop_name">shop name</label>
     <input 
       type="text" 
       name="shop[name]" 
       id="shop_name"
       value="<%= @shop.name %>">
-    <br>
 
-    <input type="submit" value="modify shop name" />
+    <input type="submit" value="modify shop name" class="btn"/>
   </form>
   <hr>
 
-  <h4>delete active items</h4>
+  <h4>items</h4>
 
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>title</th>
-        <th>price</th>
-        <th>date created</th>
-        <th>delete</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @items.each do |item| %>
+  <% if @shop.items %>
+    <table class="table table-hover table-condensed">
+      <thead>
         <tr>
-          <td>
-            <%= link_to item.title, item_url(item) %>
-          </td>
-          <td>
-            <%= number_to_currency(item.price) %>
-          </td>
-          <td>
-            <%= item.created_at.strftime('%A, %B %-d, %Y') %>
-          </td>
-          <td>
-            <%= link_to "delete", item_url(item), method: "delete" %>
-          </td>
+          <th>title</th>
+          <th>price</th>
+          <th colspan="2">date created</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @items.each do |item| %>
+          <tr>
+            <td>
+              <%= link_to item.title, item_url(item) %>
+            </td>
+            <td>
+              <%= number_to_currency(item.price) %>
+            </td>
+            <td>
+              <%= item.created_at.strftime('%A, %B %-d, %Y') %>
+            </td>
+            <td>
+              <%= button_to "edit", edit_item_url(item), method: "get", class: "btn" %>
+            </td>
+            <td>
+              <%= button_to "delete", item_url(item), method: "delete", class: "btn" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    You have no items. <%= link_to "Make some!", new_item_url %> 
+  <% end %>
 </div>

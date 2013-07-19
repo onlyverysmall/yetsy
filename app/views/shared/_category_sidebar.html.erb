@@ -5,7 +5,7 @@
       <% @categories.each do |category| %>
         <li>
           <li>
-            <%= link_to category.name, "items?utf8=✓&search=" + category.name, :'data-id' => category.id %>
+            <%= link_to category.name, items_url({ search: category.name }), :'data-id' => category.id %>
           </li>
         </li>
       <% end %>

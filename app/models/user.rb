@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
     source: :shop
 
   accepts_nested_attributes_for :shop, :reject_if => :all_blank
-  
+  default_scope includes(:favorited_items, :shop)
 
   def password
     @password || self.password_digest

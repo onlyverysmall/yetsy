@@ -45,7 +45,7 @@ class ItemsController < ApplicationController
       return
     end
 
-    if user_authorized?(@item.owner)
+    if user_authorized?(@item.shop.owner)
       render :edit
     else
       flash[:errors] ||= []

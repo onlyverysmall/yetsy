@@ -34,10 +34,10 @@
                 <li>
                   <% session[:cart] ||= [] %>
                   <% num = session[:cart].length.to_s %>
-                  <%= link_to "cart (" + num + ")", cart_url %>
+                  <%= link_to "(" + num + ")", cart_url, class: "icon-shopping-cart" %>
                 </li>
                 <li>
-                  <%= link_to "favorites", user_favorites_url(current_user) %>
+                  <%= link_to "♥", user_favorites_url(current_user), class: "unfavorite" %>
                 </li>
 
                 <% if current_user.shop %>
@@ -90,10 +90,13 @@
         </div>
 
         <div id="search">
-          <%= form_tag items_url, :method => :get do %>
-            <%= text_field_tag :search, params[:search] %>
-            <%= submit_tag "Search", class: "btn" %>
-          <% end %>
+          <form accept-charset="UTF-8" action="<%= items_url %>" method="get">
+            <div style="margin:0;padding:0;display:inline">
+              <input name="utf8" type="hidden" value="✓">
+            </div>
+            <input id="search" name="search" type="text">
+            <button class="btn icon-search" name="commit" type="submit" value="search">
+          </form>
         </div>
 
         <div class="row">

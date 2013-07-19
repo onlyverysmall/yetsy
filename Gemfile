@@ -2,8 +2,11 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
 gem 'pg'
-# gem 'sunspot_rails'
-# gem 'sunspot_solr'
+gem 'bcrypt-ruby', require: 'bcrypt'
+gem 'filepicker-rails'
+gem 'jquery-rails'
+gem 'sunspot_rails'
+gem 'sunspot_solr'
 
 group :development do 
   gem 'annotate'
@@ -21,8 +24,3 @@ group :assets do
   gem "twitter-bootstrap-rails"
 end
 
-gem 'bcrypt-ruby', require: 'bcrypt'
-gem 'filepicker-rails'
-gem 'jquery-rails'
-gem 'sunspot_rails'
-gem 'sunspot_solr'

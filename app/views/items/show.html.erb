@@ -1,6 +1,4 @@
 <%= render partial: "shared/page_header", locals: { header: @item.title } %>
-<!-- until you have somewhere to put this -->
-<%#= render partial: "shared/avatar", locals: { user: @item.owner } %>
 
 <div class="span9 offset2">
   <div class="row">
@@ -15,12 +13,14 @@
 
       <div class="sold-or-cart-btn"> 
         <% if @item.purchased %>
-          <p>SOLD</p>
+          <br><br>
+          <p><strong>SOLD</strong></p>
         <% elsif !current_user %>
           <%= link_to "log in", new_session_url, class: "btn" %> or 
           <%= link_to "sign up", new_user_url, class: "btn" %> to buy this item!
         <% elsif current_user && !(current_user.items.include?(@item)) %>
-          <%= link_to "add to cart", cart_url(cart: { item_id: @item.id }), method: "post", class: "btn" %>
+          <br><br>
+          <%= link_to "  add to cart", cart_url(cart: { item_id: @item.id }), method: "post", class: "btn icon-shopping-cart" %>
         <% end %>
       </div>
 
@@ -32,7 +32,7 @@
 
       <div class="item-show-category">
         <% cat = @item.category.name %>
-        Category: <%= link_to cat, items_url + "/?utf8=✓&search=" + cat, :'data-id' => @item.category.id %>
+        Category: <%= link_to cat, items_url({ search: cat }), :'data-id' => @item.category.id %>
       </div>
     </div>  
   </div>

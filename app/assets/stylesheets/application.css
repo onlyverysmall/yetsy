@@ -54,3 +54,7 @@ body {
   padding: 15px;
   border: 1px solid #ccc;
 }
+
+.fav-edit-buttons {
+  position: absolute;
+}
