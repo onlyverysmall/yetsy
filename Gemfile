@@ -7,6 +7,7 @@ gem 'filepicker-rails'
 gem 'jquery-rails'
 gem 'sunspot_rails'
 gem 'sunspot_solr'
+gem 'newrelic_rpm'
 
 group :development do 
   gem 'annotate'
