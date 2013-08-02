@@ -28,7 +28,7 @@
               <strong><%= number_to_currency(order_total(purchase)) %></strong>
             </td>
             <td>
-              <%= purchase.status ? "shipped" : "not shipped" %>
+              <%= purchase.status ? "shipped" : "not shipped" %> 
             </td>
           </tr>
           <% purchase.items.each do |item| %>
